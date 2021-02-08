@@ -1,0 +1,27 @@
+<section class="dashboard-container">
+
+    <div class="title">
+        <h2>Check Weather</h2>
+    </div>
+
+    <form [formGroup]="citiesForm" class="city-wrapper">
+
+        <ng-container formArrayName="citiesFormArray">
+
+            <ng-container *ngFor="let cityForm of citiesForm.get('citiesFormArray')['controls']; let i = index">
+
+                <ng-container [formGroupName]="i">
+
+                    <app-city [form]="cityForm"></app-city>
+
+                </ng-container>
+
+            </ng-container>
+
+        </ng-container>
+
+    </form>
+
+    <button (click)="addCityFormGroup()">add</button>
+
+</section>

@@ -1,0 +1,32 @@
+@import '../../../../../assets/scss/variables.scss';
+
+:host {
+    padding: 1rem;
+    display: flex;
+    flex: 1;
+    flex-basis: 100%;
+
+    form {
+        display: flex;
+        flex: 1;
+
+        ::ng-deep {
+            .mat-card {
+                display: flex;
+                flex: 1;
+                align-items: center;
+                flex-basis: 100%;
+                justify-content: center;
+
+                mat-form-field {
+                    display: flex;
+                }
+            }
+        }
+
+        .action-wrapper {
+            display: flex;
+        }
+    }
+
+}

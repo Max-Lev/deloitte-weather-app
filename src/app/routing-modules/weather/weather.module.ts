@@ -9,6 +9,12 @@ import { CityComponent } from './components/city/city.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { EffectsModule } from '@ngrx/effects';
+import { WeatherEffects } from './state/effects/weather.effects';
+import { StoreModule } from '@ngrx/store';
+import { citiesFeatureKey, citiesReducer } from './state/reducers/cities.reducer';
+
+
 @NgModule({
   declarations: [
     DashboardContainerComponent,
@@ -21,7 +27,9 @@ import { MatIconModule } from '@angular/material/icon';
     HttpClientModule,
     MatCardModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    // EffectsModule.forFeature([WeatherEffects]),
+    StoreModule.forFeature(citiesFeatureKey, { citiesReducer: citiesReducer })
   ]
 })
 export class WeatherModule {

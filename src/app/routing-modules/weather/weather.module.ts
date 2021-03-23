@@ -10,9 +10,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { EffectsModule } from '@ngrx/effects';
-import { WeatherEffects } from './state/effects/weather.effects';
+import { CitiesEffects } from './state/effects/cities.effects';
 import { StoreModule } from '@ngrx/store';
 import { citiesFeatureKey, citiesReducer } from './state/reducers/cities.reducer';
+import { GetCitiesService } from './services/get-cities.service';
+import { cityOptionsReducer } from './state/reducers/cities-options.reducer';
 
 
 @NgModule({
@@ -28,8 +30,14 @@ import { citiesFeatureKey, citiesReducer } from './state/reducers/cities.reducer
     MatCardModule,
     MatInputModule,
     MatIconModule,
-    // EffectsModule.forFeature([WeatherEffects]),
-    StoreModule.forFeature(citiesFeatureKey, { citiesReducer: citiesReducer })
+    EffectsModule.forFeature([CitiesEffects]),
+    StoreModule.forFeature(citiesFeatureKey, {
+      citiesReducer,
+      citiesOptionsReducer: cityOptionsReducer
+    })
+  ],
+  providers: [
+    GetCitiesService
   ]
 })
 export class WeatherModule {

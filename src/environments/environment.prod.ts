@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  citiesUrl: '/assets/cities/cities.db.json'
 };

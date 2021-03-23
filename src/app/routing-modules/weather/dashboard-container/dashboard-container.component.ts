@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
+import { AppState } from 'src/app/store';
+import { loadCitiesAction } from '../state/actions/cities.actions';
 import { CitiesState } from '../state/reducers/cities.reducer';
 
 @Component({
@@ -12,27 +14,31 @@ export class DashboardContainerComponent implements OnInit, AfterViewInit {
 
   citiesForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private citiesState: Store<CitiesState>) {
+  // constructor(private formBuilder: FormBuilder, private citiesState: Store<CitiesState>) {
+  constructor(private formBuilder: FormBuilder, private citiesState: Store<AppState>) {
     this.initForm();
-    console.log(this.citiesState);
 
-    // this.citiesState.pipe(select(state=>state.))
+    this.citiesState.pipe(select(state => state.citiesOptionsState)).subscribe((optionsState) => {
+      console.log(optionsState)
+    })
 
     this.citiesState.subscribe((state) => {
-      console.log(state);
-    })
+      console.log('state: ', state);
+    });
+
 
   }
 
   ngOnInit(): void {
-
+    this.citiesState.dispatch(loadCitiesAction());
   }
 
   ngAfterViewInit(): void {
+
     this.citiesForm.valueChanges.subscribe((value: any) => {
-      console.log(value);
-      console.log(this.citiesForm);
-    })
+
+    });
+
   };
 
   initForm() {
@@ -51,7 +57,7 @@ export class DashboardContainerComponent implements OnInit, AfterViewInit {
   };
 
   public addCityFormGroup() {
-    const cities = this.citiesForm.get('citiesFormArray') as FormArray
+    const cities: FormArray = this.citiesForm.get('citiesFormArray') as FormArray;
     cities.push(this.createFormGroup());
   }
 

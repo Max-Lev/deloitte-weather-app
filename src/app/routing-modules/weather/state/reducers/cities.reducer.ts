@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import * as WeatherActions from '../actions/cities.actions';
+import * as citiesActions from '../actions/cities.actions';
 
 export const citiesFeatureKey = 'citiesState';
 
@@ -11,23 +11,31 @@ export interface CitiesState {
 
 export const initialState: CitiesState = {
   cityName: null,
-  temp: null
+  temp: null,
+  tempType: null
 };
 
 export const addState: CitiesState = {
   cityName: null,
-  temp: null
+  temp: null,
+  tempType: null
 };
-
-
-
 
 export const citiesReducer = createReducer(
   initialState,
 
-  on(WeatherActions.citiesInitial, state => state),
-  on(WeatherActions.citySelected, (state, action) => state),
-  on(WeatherActions.citiesAdd, (state, action) => state),
+  // on(citiesActions.loadCitiesAction, (state) => {
+  //   // console.log(`${citiesActions.loadCitiesAction}`, state);
+  //   return state;
+  // }),
+  // on(citiesActions.loadCitiesActionSuccess, (state, action) => {
+  //   console.log(citiesActions.loadCitiesActionSuccess, state, action);
+
+  //   return {
+  //     // ...state
+  //   };
+  // }),
+  on(citiesActions.addCityAction, (state, action) => state),
 
 );
 
